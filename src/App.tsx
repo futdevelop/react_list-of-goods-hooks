@@ -15,7 +15,11 @@ export const goodsFromServer = [
   'Garlic',
 ];
 
-function getPreparedGoods(goods: string[], sortField: string, isReversed: boolean): string[] {
+function getPreparedGoods(
+  goods: string[],
+  sortField: string,
+  isReversed: boolean,
+): string[] {
   const preparedGoods = [...goods];
 
   switch (sortField) {
@@ -37,7 +41,7 @@ function getPreparedGoods(goods: string[], sortField: string, isReversed: boolea
 }
 
 export const App = () => {
-  const [sortField, setSortField] = useState('');
+  const [sortField, setSortField] = useState('alphabet');
   const [isReversed, setIsReversed] = useState(false);
 
   const visibleGoods = getPreparedGoods(goodsFromServer, sortField, isReversed);
@@ -91,7 +95,9 @@ export const App = () => {
 
       <ul>
         {visibleGoods.map(good => (
-          <li data-cy="Good">{good}</li>
+          <li key={good} data-cy="Good">
+            {good}
+          </li>
         ))}
       </ul>
     </div>
